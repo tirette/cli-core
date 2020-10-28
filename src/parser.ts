@@ -18,4 +18,9 @@ if (isThisCommand) {
   conf.set(argv);
 }
 
-export default conf.get;
+const { _: argument, ...flag } = conf.all;
+
+export {
+  argument,
+  flag
+}
