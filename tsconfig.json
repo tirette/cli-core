@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["es2015", "dom"],
+    "outDir": "./lib",
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": true,
+    "moduleResolution": "node"
+  }
+}
