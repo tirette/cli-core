@@ -1,6 +1,6 @@
 {
   "name": "@tirette/cli-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The core module to parse CLI arguments and execute CLI commands.",
   "main": "./lib/index.js",
   "repository": "git://github.com/tirette/cli-core.git",
