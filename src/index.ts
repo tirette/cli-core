@@ -1,8 +1,11 @@
-import { argument, flag } from './parser';
+import { command, positionals, flags, storeArgs, readArgs } from './parser';
 import execute from './execute';
 
 export {
-  argument,
-  flag,
+  command,
+  positionals,
+  flags,
+  storeArgs,
+  readArgs,
   execute
 };

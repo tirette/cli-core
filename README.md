@@ -23,28 +23,56 @@ Executes a CLI command.
 ```javascript
 import { execute } from '@tirette/cli-core';
 
-execute('command');
+execute('example');
 ```
 
-### Argument
-Read out an argument passed down to the CLI command defined in package.json bin. These arguments are stored until the bin command is ran again.
+### Command
+Read out the command that is being run.
 ```cli
-CLI: command argument
+CLI: example argument
 ```
 ```javascript
-import { argument } from '@tirette/cli-core';
+import { command } from '@tirette/cli-core';
 
-console.log(argument); // ['argument']
+console.log(command); // ['example']
 ```
 
-### Flag
-Read out a flag passed down to the CLI command defined in package.json bin. These flags are stored until the bin command is ran again.
+### Positionals
+Read out positional arguments passed down to the CLI command defined in package.json bin.
 ```cli
-CLI: command --boolean --option='hello world'
+CLI: example argument
 ```
 ```javascript
-import { flag } from '@tirette/cli-core';
+import { positionals } from '@tirette/cli-core';
 
-console.log(flag.boolean); // true
-console.log(flag.option); // hello world
+console.log(positionals); // ['argument']
 ```
+
+### Flags
+Read out a flag passed down to the CLI command defined in package.json bin.
+```cli
+CLI: example --boolean --option='hello world'
+```
+```javascript
+import { flags } from '@tirette/cli-core';
+
+console.log(flags.boolean); // true
+console.log(flags.option); // hello world
+```
+
+### Store arguments
+Write arguments to a file.
+```javascript
+import { storeArgs } from '@tirette/cli-core';
+
+storeArgs('filepath');
+```
+
+### Read arguments from store
+Read arguments from file.
+```javascript
+import { readArgs } from '@tirette/cli-core';
+
+const { positionals, flags } = readArgs('filepath');
+```
+

@@ -1,26 +1,29 @@
-import Configstore from 'configstore';
 import parseArgv from 'minimist';
-import { local } from './utils/files';
 import fs from 'fs';
 
 /*
 * Parses the arguments passed down to the CLI and stores them.
 */
 
-const pkg = JSON.parse(fs.readFileSync(local('package.json')).toString());
-const conf = new Configstore(pkg.name);
-const isThisCommand = process.argv[1].indexOf(Object.keys(pkg.bin)[0]) >= 0;
+const command = process.argv[1].split('/').pop();
+const args = parseArgv(process.argv.splice(2));
+const { _: positionals, ...flags } = args;
 
-if (isThisCommand) {
-  const argv = parseArgv(process.argv.slice(2));
-
-  conf.clear();
-  conf.set(argv);
+const storeArgs = (path: string): void => {
+  const data = JSON.stringify({ positionals, flags });
+  fs.writeFileSync(path, data);
 }
 
-const { _: argument, ...flag } = conf.all;
+const readArgs = (path: string) => {
+  const fileContent = fs.readFileSync(path);
+
+  return JSON.parse(fileContent.toString());
+}
 
 export {
-  argument,
-  flag
+  command,
+  positionals,
+  flags,
+  storeArgs,
+  readArgs
 }
