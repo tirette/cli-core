@@ -11,13 +11,19 @@ const execute = async (command: string): Promise<void> => {
       shell: true
     });
 
-    executedCommand.on('error', reject);
+    executedCommand.on('error', (): void => {
+      reject();
+      process.exit(1);
+    });
+
     executedCommand.on('exit', (code: number): void => {
       if (code === 0) {
         resolve();
       } else {
         reject();
       }
+
+      process.exit(code);
     });
   })
 }
